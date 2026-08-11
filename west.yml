@@ -12,4 +12,5 @@ manifest:
           - hal_rpi_pico
           - hal_infineon # Needed for rpi_pico
           - hal_espressif
+          - hal_nordic
         path-prefix: deps
