@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 device=$1
+name=${2:-pico}
 
 if [ -z "$device" ]; then
     echo "No device specified"
@@ -14,7 +15,7 @@ fi
 
 echo "Device: $device"
 
-mountpoint="/mnt/pico"
+mountpoint="/mnt/$name"
 sudo mkdir -p "$mountpoint"
 
 if mountpoint -q "$mountpoint"; then
