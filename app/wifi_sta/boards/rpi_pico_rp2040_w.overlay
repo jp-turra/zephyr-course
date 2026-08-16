@@ -1,0 +1,33 @@
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+		label = "CDC_ACM_0";
+	};
+};
+
+
+/ {
+	chosen {
+        zephyr,console = &cdc_acm_uart0;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_onboard: led_onboard {
+			gpios = <&cyw43_gpio 0 GPIO_ACTIVE_HIGH>;
+			label = "LED";
+		};
+
+		red_led: red_led {
+			gpios = <&gpio0 16 GPIO_ACTIVE_HIGH>;
+			label = "LED";
+		};
+	};
+
+	aliases {
+		led0 = &led_onboard;
+		led1 = &red_led;
+	};
+};

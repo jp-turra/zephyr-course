@@ -7,3 +7,6 @@ build
 # West files
 .west
 deps
+
+# Local files
+*.local*

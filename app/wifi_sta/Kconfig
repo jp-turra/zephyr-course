@@ -1,0 +1,17 @@
+source "Kconfig.zephyr"
+
+menu "WiFi Station Configuration"
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default ""
+    help
+      SSID da rede WiFi para conexão em modo Station.
+
+config WIFI_PSK
+    string "WiFi PSK"
+    default ""
+    help
+      Senha (PSK) da rede WiFi. Deixe vazio para redes abertas.
+
+endmenu
