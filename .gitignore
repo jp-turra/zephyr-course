@@ -10,3 +10,4 @@ deps
 
 # Local files
 *.local*
+.vscode

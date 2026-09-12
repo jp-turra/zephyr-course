@@ -146,6 +146,15 @@ int main(void)
                 LOG_ERR("Failed to set HEARTBEAT");
             }
             
+            if (brightness > 0.5)
+            {
+                gpio_pin_set_dt(&led, 1);
+            }
+            else
+            {
+                gpio_pin_set_dt(&led, 0);
+            }
+
             // (~60 FPS)
             k_msleep(16);
         }
