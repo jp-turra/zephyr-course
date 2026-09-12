@@ -140,7 +140,6 @@ int main(void)
 
             // Converte para porcentagem (0–100%)
             uint32_t level = pwm.period*brightness;
-            printf("Brilho: %d%%\n", level);
 
             if (pwm_set_pulse_dt(&pwm, level) != 0 && verbose)
             {
