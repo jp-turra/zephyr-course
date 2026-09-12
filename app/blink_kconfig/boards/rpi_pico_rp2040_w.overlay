@@ -1,0 +1,50 @@
+// USB Console
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+		label = "CDC_ACM_0";
+	};
+};
+
+&pinctrl {
+    pwm_ch0_default: pwm_ch0_default {
+        group1 {
+			// zephyr/include/zephyr/dt-bindings/pinctrl/rpi-pico-pinctrl-common.h
+            pinmux = <PWM_0A_P0>; // PIN GPIO16, slice 0, Channel A
+        };
+    };
+};
+
+&pwm {
+    status = "okay";
+    pinctrl-0 = <&pwm_ch0_default>;
+    pinctrl-names = "default";
+};
+
+/ {
+	chosen {
+        zephyr,console = &cdc_acm_uart0;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_red: led_red {
+			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+			label = "LED";
+		};
+	};
+
+	pwmleds {
+        compatible = "pwm-leds";
+        pwm_led0: pwm_led_0 {
+            pwms = <&pwm 0 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
+        };
+    };
+
+	aliases {
+		led0 = &led_red;
+		pwm-led0 = &pwm_led0;
+	};
+};
