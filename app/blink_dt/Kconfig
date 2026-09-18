@@ -1,0 +1,8 @@
+menu "Blink Led Options"
+    config APP_HEARTBEAT_PERIOD_MS
+        int "APP_HEARTBEAT_PERIOD_MS"
+        default 500
+        range 100 2000
+endmenu
+
+source "Kconfig.zephyr"

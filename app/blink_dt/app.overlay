@@ -1,0 +1,21 @@
+// raspbery pi pico
+/ {
+	leds {
+		compatible = "gpio-leds";
+
+		led0: led_onboard {
+			gpios = <&cyw43_gpio 0 GPIO_ACTIVE_HIGH>;
+			label = "LED";
+		};
+
+        led_pth0: led_green {
+            gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+            label = "ExternLED";
+        };
+	};
+
+    aliases {
+        app-led = &led_pth0;
+        led1 = "/leds/led_onboard";
+    };
+};
