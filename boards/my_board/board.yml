@@ -1,0 +1,6 @@
+board:
+  name: my_board
+  full_name: FRDM-MCXN236
+  vendor: nxp
+  socs:
+  - name: mcxn236

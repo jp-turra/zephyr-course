@@ -39,6 +39,12 @@ west build -b \<board\> \<app/path\>
 west build -b rpi_pico/rp2040/w app/blink_kconfig/
 ```
 
+Custom Board
+
+```sh
+west build -b my_board deps/zephyr/samples/basic/blinky -p auto -- -DBOARD_ROOT=${PWD}/
+```
+
 ### Flashing
 
 runner = `uf2`, `jlink` and more...
