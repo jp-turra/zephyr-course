@@ -1,0 +1,83 @@
+/dts-v1/;
+
+#include <nxp/mcx/nxp_mcxn23x.dtsi>
+
+/ {
+	model = "NXP FRDM_N236 board";
+	compatible = "nxp,mcxn236", "nxp,mcx";
+
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash;
+		zephyr,flash-controller = &fmu;
+		zephyr,code-partition = &slot0_partition;
+	};
+
+    aliases {
+        led0 = &green_led;
+		led1 = &red_led;
+		led2 = &blue_led;
+    };
+
+    leds {
+		compatible = "gpio-leds";
+
+		green_led: led_1 {
+			gpios = <&gpio4 19 GPIO_ACTIVE_LOW>;
+			label = "Green LED";
+		};
+
+		blue_led: led_2 {
+			gpios = <&gpio4 17 GPIO_ACTIVE_LOW>;
+			label = "Blue LED";
+		};
+
+		red_led: led_3 {
+			gpios = <&gpio4 18 GPIO_ACTIVE_LOW>;
+			label = "Red LED";
+		};
+	};
+};
+
+&gpio4 {
+    status = "okay";
+};
+
+&flash {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		/*
+		 * Partition sizes must be aligned
+		 * to the flash memory sector size of 8KB.
+		 */
+		boot_partition: partition@0 {
+			label = "mcuboot";
+			reg = <0x00000000 DT_SIZE_K(80)>;
+		};
+
+		/* For the MCUBoot "upgrade only" method,
+		 * the slot sizes must be equal.
+		 */
+		slot0_partition: partition@14000 {
+			label = "image-0";
+			reg = <0x00014000 DT_SIZE_K(440)>;
+		};
+
+		slot1_partition: partition@84000 {
+			label = "image-1";
+			reg = <0x0084000 DT_SIZE_K(440)>;
+		};
+
+		storage_partition: partition@f0000 {
+			label = "storage";
+			reg = <0x000f0000 DT_SIZE_K(64)>;
+		};
+	};
+};
+
+&systick {
+	status = "okay";
+};
